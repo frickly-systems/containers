@@ -1,0 +1,10 @@
+#!/bin/bash
+
+MAX_RETRIES=3
+
+n=0
+until [ "$n" -ge $MAX_RETRIES ]
+do
+   west update && break
+   n=$((n+1)) 
+done
