@@ -31,5 +31,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: latest
+          tags: latest, $(date +%Y-%M-%d_%M-%m-%S)
           labels: ${{ steps.meta.outputs.labels }}
