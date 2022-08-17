@@ -30,22 +30,14 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H-%M-%S')"
 
-      - name: Disply variable
+      - name: Disply variables
         run: |
           echo ${{ steps.date.outputs.date }}
 
-      - name: Build and push Docker image (latest)
+      - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: latest
-          labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Build and push Docker image (current date)
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.date.outputs.date }}
+          tags: latest,${{ steps.date.outputs.date }}
           labels: ${{ steps.meta.outputs.labels }}
