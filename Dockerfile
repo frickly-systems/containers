@@ -11,9 +11,8 @@ RUN chown -R user:user /workdir
 USER user
 # cmake package is registered under user: user (see zephyrprojectrtos/ci dockerfile)
 
-# get newest revision. -> Only downgrades when user app specifies release
-ARG ZEPHYR_VERSION main
-RUN west init --mr ${ZEPHYR_VERSION} .
+# Pull from main to get latest updates
+RUN west init .
 
 # prepoluate directories
 RUN west-update-with-retry
