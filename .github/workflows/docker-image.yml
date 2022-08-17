@@ -22,4 +22,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag zephyr-ci:latest
     - name: docker push
-      run: docker push ${{secrets.DOCKER_USER}}/zephyr-ci
+      run: docker push fricklysystems/zephyr-ci:latest
