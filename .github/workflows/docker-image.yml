@@ -6,7 +6,8 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '15 * * * *'
+    # “At 04:20 on day-of-month 1.”
+    - cron: '*/15 * * * *'
 
 jobs:
   push_to_registry:
