@@ -1,6 +1,7 @@
 FROM zephyrprojectrtos/ci:latest
 
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+  tree
 
 COPY west-update-with-retry /usr/local/bin
 RUN chmod +x /usr/local/bin/west-update-with-retry
