@@ -1,4 +1,5 @@
 FROM zephyrprojectrtos/ci:latest
+ARG REPOSITORY_URL
 
 RUN apt-get update && apt-get install -y \
   tree
@@ -13,7 +14,7 @@ USER user
 # cmake package is registered under user: user (see zephyrprojectrtos/ci dockerfile)
 
 # Pull from main to get latest updates
-RUN west init .
+RUN west init -m $REPOSITORY_URL --mr main
 
 # prepoluate directories
 RUN west-update-with-retry
