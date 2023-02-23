@@ -1,13 +1,13 @@
 name: Publish Docker image
 
-on:
-  # push:
-    # branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  schedule:
-    # “At 04:20 on day-of-month 1.”
-    - cron: '20 4 1 * *'
+# on:
+#   # push:
+#     # branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+#   schedule:
+#     # “At 04:20 on day-of-month 1.”
+#     - cron: '20 4 1 * *'
 
 jobs:
   push_to_registry:
