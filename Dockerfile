@@ -18,5 +18,9 @@ RUN west init -m $REPOSITORY_URL --mr main
 
 # prepoluate directories
 RUN west-update-with-retry
+
+COPY install-python-dependencies /usr/local/bin
+RUN install-python-dependencies
+
 # remove .west config, as we only need the directories such that they do not need to be downloaded again
 RUN rm -rf .west
