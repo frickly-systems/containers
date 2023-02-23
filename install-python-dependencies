@@ -1,5 +1,13 @@
 #!/bin/bash
 
-[ -f zephyr/scripts/requirements.txt ] && pip3 install --user -r zephyr/scripts/requirements.txt
-[ -f nrf/scripts/requirements.txt ] && pip3 install --user -r nrf/scripts/requirements.txt
-[ -f bootloader/mcuboot/scripts/requirements.txt ] && pip3 install --user -r bootloader/mcuboot/scripts/requirements.txt
+if [ -f nrf/scripts/requirements.txt ]; then
+  pip3 install --user -r nrf/scripts/requirements.txt
+fi
+
+if [ -f zephyr/scripts/requirements.txt ]; then
+  pip3 install --user -r zephyr/scripts/requirements.txt 
+fi 
+
+if [ -f bootloader/mcuboot/scripts/requirements.txt ]; then
+  pip3 install --user -r bootloader/mcuboot/scripts/requirements.txt
+fi
