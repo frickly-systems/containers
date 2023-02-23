@@ -37,10 +37,19 @@ jobs:
         run: |
           echo ${{ steps.date.outputs.date }}
 
-      - name: Build and push Docker image
+      - name: Build and push Zephyr Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
           tags: fricklysystems/zephyr-ci:latest,fricklysystems/zephyr-ci:${{ steps.date.outputs.date }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push nrf-sdk Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
+          context: .
+          push: true
+          tags: fricklysystems/nrfsdk-ci:latest,fricklysystems/nrfsdk-ci:${{ steps.date.outputs.date }}
           labels: ${{ steps.meta.outputs.labels }}
