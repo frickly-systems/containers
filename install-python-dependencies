@@ -2,12 +2,20 @@
 
 if [ -f nrf/scripts/requirements.txt ]; then
   pip3 install --user -r nrf/scripts/requirements.txt
+else
+  echo "requirements.txt not found for NRF sdk"
 fi
 
 if [ -f zephyr/scripts/requirements.txt ]; then
   pip3 install --user -r zephyr/scripts/requirements.txt 
+else
+  echo "requirements.txt not found for zephyr directory"
+  exit 1
 fi 
 
 if [ -f bootloader/mcuboot/scripts/requirements.txt ]; then
   pip3 install --user -r bootloader/mcuboot/scripts/requirements.txt
+else
+  echo "requirements.txt not found for bootloader directory"
+  exit 2
 fi
