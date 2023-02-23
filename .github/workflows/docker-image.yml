@@ -36,10 +36,6 @@ jobs:
         run: |
           echo ${{ steps.date.outputs.date }}
 
-      - name: Set ZEPHYR Repositoyr URL
-        run: |
-          REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
-
       - name: Build and push Zephyr Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
@@ -50,7 +46,7 @@ jobs:
 
       - name: Set NRF-SDK Repositoyr URL
         run: |
-          REPOSITORY_URL=https://github.com/zephyrproject-rtos/zephyr
+          REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
 
       - name: Build and push nrf-sdk Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc

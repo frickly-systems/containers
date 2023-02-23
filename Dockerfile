@@ -1,5 +1,5 @@
 FROM zephyrprojectrtos/ci:latest
-ARG REPOSITORY_URL
+ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/zephyr"
 
 RUN apt-get update && apt-get install -y \
   tree
