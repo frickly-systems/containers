@@ -2,12 +2,12 @@ name: Publish Docker image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "test_registry" ]
   pull_request:
-    branches: [ "main" ]
-  schedule:
+    branches: [ "main" "test_registry" ]
+  # schedule:
     # “At 04:20 on day-of-month 1.”
-    - cron: '20 4 1 * *'
+    # - cron: '20 4 1 * *'
 
 jobs:
   push_to_registry:
@@ -20,14 +20,15 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: fricklysystems/zephyr-ci
+          images: ${{ env.REGISTRY }}/zephyr-ci
       
       - name: Get current date
         id: date
@@ -42,8 +43,12 @@ jobs:
         with:
           context: .
           push: true
-          tags: fricklysystems/zephyr-ci:latest,fricklysystems/zephyr-ci:${{ steps.date.outputs.date }}
+          tags: fricklysystems/zephyr-ci:latest
           labels: ${{ steps.meta.outputs.labels }}
+            
+
+
+
 
       - name: Build and push nrf-sdk Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
