@@ -1,26 +1,30 @@
 FROM zephyrprojectrtos/ci:latest
 ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/zephyr"
 
+
+
 RUN apt-get update && apt-get install -y \
   tree
 
-COPY west-update-with-retry /usr/local/bin
-RUN chmod +x /usr/local/bin/west-update-with-retry
+RUN touch /asadfsdfasdf
 
-RUN mkdir -p /workdir
-WORKDIR /workdir
-RUN chown -R user:user /workdir
-USER user
-# cmake package is registered under user: user (see zephyrprojectrtos/ci dockerfile)
+# COPY west-update-with-retry /usr/local/bin
+# RUN chmod +x /usr/local/bin/west-update-with-retry
 
-# Pull from main to get latest updates
-RUN west init -m $REPOSITORY_URL --mr main
+# RUN mkdir -p /workdir
+# WORKDIR /workdir
+# RUN chown -R user:user /workdir
+# USER user
+# # cmake package is registered under user: user (see zephyrprojectrtos/ci dockerfile)
 
-# prepoluate directories
-RUN west-update-with-retry
+# # Pull from main to get latest updates
+# RUN west init -m $REPOSITORY_URL --mr main
 
-COPY install-python-dependencies /usr/local/bin
-RUN install-python-dependencies
+# # prepoluate directories
+# RUN west-update-with-retry
 
-# remove .west config, as we only need the directories such that they do not need to be downloaded again
-RUN rm -rf .west
+# COPY install-python-dependencies /usr/local/bin
+# RUN install-python-dependencies
+
+# # remove .west config, as we only need the directories such that they do not need to be downloaded again
+# RUN rm -rf .west
