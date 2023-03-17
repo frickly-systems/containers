@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main", "test_registry" ]
   pull_request:
-    branches: [ "main" "test_registry" ]
+    branches: [ "main", "test_registry" ]
   # schedule:
     # “At 04:20 on day-of-month 1.”
     # - cron: '20 4 1 * *'
