@@ -29,11 +29,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Extract333 metadata (tags, labels) for Docker
         id: printout
-        run: 
-          - echo "${{ env.REGISTRY}}"
-          - echo "${{ env.IMAGE_NAME}}"
+        run: echo "${{ env.REGISTRY}}"
+
+      - name: Extract222 metadata (tags, labels) for Docker
+        id: printout2
+        run: echo "${{ env.IMAGE_NAME}}"
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
