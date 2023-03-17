@@ -29,13 +29,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Extract333 metadata (tags, labels) for Docker
-        id: printout
-        run: echo "${{ env.REGISTRY}}"
-
-      - name: Extract222 metadata (tags, labels) for Docker
-        id: printout2
-        run: echo "${{ env.IMAGE_NAME}}"
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H-%M-%S')"
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -46,13 +42,15 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
+          build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
           context: .
           push: true
-          tags: ghcr.io/frickly-systems/containers/zephyr-ci:latest
+          tags: ghcr.io/frickly-systems/containers/zephyr-ci:latest,ghcr.io/frickly-systems/containers/zephyr-ci:${{ steps.date.outputs.date }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
+          build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
           context: .
           push: true
-          tags: ghcr.io/frickly-systems/containers/ncs-ci:latest
+          tags: ghcr.io/frickly-systems/containers/ncs-ci:latest,ghcr.io/frickly-systems/containers/ncs-ci:${{ steps.date.outputs.date }}
