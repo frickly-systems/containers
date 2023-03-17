@@ -45,7 +45,7 @@ jobs:
           build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
           context: .
           push: true
-          tags: ghcr.io/frickly-systems/containers/zephyr-ci:latest,ghcr.io/frickly-systems/containers/zephyr-ci:${{ steps.date.outputs.date }}
+          tags: ghcr.io/${{ github.repository }}/zephyr-ci:latest,ghcr.io/${{ github.repository }}/zephyr-ci:${{ steps.date.outputs.date }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
@@ -53,4 +53,4 @@ jobs:
           build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
           context: .
           push: true
-          tags: ghcr.io/frickly-systems/containers/ncs-ci:latest,ghcr.io/frickly-systems/containers/ncs-ci:${{ steps.date.outputs.date }}
+          tags: ghcr.io/${{ github.repository }}/ncs-ci:latest,ghcr.io/${{ github.repository }}/ncs-ci:${{ steps.date.outputs.date }}
