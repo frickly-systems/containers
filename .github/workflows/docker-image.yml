@@ -46,7 +46,7 @@ jobs:
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           build-args: REPOSITORY_URL=https://github.com/zephyrproject-rtos/zephyr
-          context: .
+          context: "{{defaultContext}}:zephyr"
           push: true
           tags: ghcr.io/${{ github.repository }}/zephyr-ci:latest,ghcr.io/${{ github.repository }}/zephyr-ci:${{ steps.date.outputs.date }}
 
@@ -58,10 +58,10 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}/ncs-ci:latest,ghcr.io/${{ github.repository }}/ncs-ci:${{ steps.date.outputs.date }}
 
-      - name: Build and push ConvCo Docker Image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
-          context: "{{defaultContext}}:zephyr"
-          push: true
-          tags: ghcr.io/${{ github.repository }}/ncs-ci:latest,ghcr.io/${{ github.repository }}/ncs-ci:${{ steps.date.outputs.date }}
+      # - name: Build and push ConvCo Docker Image
+      #   uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      #   with:
+      #     build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
+      #     context: "{{defaultContext}}:zephyr"
+      #     push: true
+      #     tags: ghcr.io/${{ github.repository }}/ncs-ci:latest,ghcr.io/${{ github.repository }}/ncs-ci:${{ steps.date.outputs.date }}
