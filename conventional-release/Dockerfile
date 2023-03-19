@@ -10,3 +10,5 @@ RUN mv $(which convco) /convco
 
 FROM ubuntu:latest
 COPY --from=base /convco /usr/bin/convco
+RUN apt-get update && apt-get install -y \
+  git
