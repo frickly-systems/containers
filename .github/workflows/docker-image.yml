@@ -43,7 +43,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Zephyr CI Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        uses: docker/build-push-action@v4
         with:
           build-args: REPOSITORY_URL=https://github.com/zephyrproject-rtos/zephyr
           context: "{{defaultContext}}:zephyr"
@@ -51,7 +51,7 @@ jobs:
           tags: ghcr.io/${{ github.repository }}/zephyr-ci:latest,ghcr.io/${{ github.repository }}/zephyr-ci:${{ steps.date.outputs.date }}
 
       - name: Build and push NCS CI Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        uses: docker/build-push-action@v4
         with:
           build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
           context: "{{defaultContext}}:zephyr"
