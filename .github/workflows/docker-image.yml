@@ -45,7 +45,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
+          build-args: REPOSITORY_URL=https://github.com/zephyrproject-rtos/zephyr
           context: .
           push: true
           tags: ghcr.io/${{ github.repository }}/zephyr-ci:latest,ghcr.io/${{ github.repository }}/zephyr-ci:${{ steps.date.outputs.date }}
