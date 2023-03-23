@@ -2,9 +2,9 @@ name: Publish Docker image
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", convco ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", convco ]
   schedule:
     # “At 04:20 on day-of-month 1.”
     - cron: '20 4 1 * *'
@@ -35,6 +35,12 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H-%M-%S')"
+          
+        # Setting up Docker Buildx with docker-container driver is required
+        # at the moment to be able to use a subdirectory with Git context
+        # See: https://github.com/docker/build-push-action#git-context
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
@@ -42,18 +48,25 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      - name: Build and push Zephyr CI Docker image
+        uses: docker/build-push-action@v4
         with:
           build-args: REPOSITORY_URL=https://github.com/zephyrproject-rtos/zephyr
-          context: .
+          context: "{{defaultContext}}:zephyr"
           push: true
           tags: ghcr.io/${{ github.repository }}/zephyr-ci:latest,ghcr.io/${{ github.repository }}/zephyr-ci:${{ steps.date.outputs.date }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      - name: Build and push NCS CI Docker image
+        uses: docker/build-push-action@v4
         with:
           build-args: REPOSITORY_URL=https://github.com/nrfconnect/sdk-nrf
-          context: .
+          context: "{{defaultContext}}:zephyr"
           push: true
           tags: ghcr.io/${{ github.repository }}/ncs-ci:latest,ghcr.io/${{ github.repository }}/ncs-ci:${{ steps.date.outputs.date }}
+
+      - name: Build and push ConvCo Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: "{{defaultContext}}:conventional-release"
+          push: true
+          tags: ghcr.io/${{ github.repository }}/convco:latest,ghcr.io/${{ github.repository }}/convco:${{ steps.date.outputs.date }}
