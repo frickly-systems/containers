@@ -2,7 +2,14 @@ FROM zephyrprojectrtos/ci:latest
 ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/zephyr"
 
 RUN apt-get update && apt-get install -y \
+  curl \
   tree
+  
+RUN apt-get remove -y \
+  cargo \
+  rustc
+  
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 COPY west-update-with-retry /usr/local/bin
 RUN chmod +x /usr/local/bin/west-update-with-retry
