@@ -16,6 +16,8 @@ USER user
 
 # install rust under user
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+# add cargo bin folder to PATH
+ENV PATH="/home/user/.cargo/bin:$PATH"
 
 # Pull from main to get latest updates
 RUN west init -m $REPOSITORY_URL --mr main
