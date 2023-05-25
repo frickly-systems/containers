@@ -1,6 +1,8 @@
 FROM zephyrprojectrtos/ci:latest
 ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/zephyr"
 
+ENV PATH="${PATH}:/home/user/.local/bin"
+
 RUN apt-get update && apt-get install -y \
   curl \
   tree
