@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# lcov_cobertura is used to convert lcov files to cobertura reports
+# used in gitlab MR to display test coverage
+pip3 install --user lcov_cobertura
+
 if [ -f nrf/scripts/requirements.txt ]; then
   pip3 install --user -r nrf/scripts/requirements.txt
 else
