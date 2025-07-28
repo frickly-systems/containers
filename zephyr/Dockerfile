@@ -1,4 +1,5 @@
-FROM zephyrprojectrtos/ci:latest
+ARG ZEPHYR_RTOS_TOOLCHAIN_VERSION
+FROM zephyrprojectrtos/ci:${ZEPHYR_RTOS_TOOLCHAIN_VERSION}
 ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/zephyr"
 
 ENV PATH="${PATH}:/home/user/.local/bin"
@@ -21,8 +22,9 @@ RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 # add cargo bin folder to PATH
 ENV PATH="/home/user/.cargo/bin:$PATH"
 
-# Pull from main to get latest updates
-RUN west init -m $REPOSITORY_URL --mr main
+# Pull from specified version
+ARG ZEPHYR_RTOS_VERSION
+RUN west init -m $REPOSITORY_URL --mr ${ZEPHYR_RTOS_VERSION}
 
 # prepoluate directories
 RUN west-update-with-retry
