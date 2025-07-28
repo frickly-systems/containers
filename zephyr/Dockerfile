@@ -1,6 +1,6 @@
 ARG ZEPHYR_RTOS_TOOLCHAIN_VERSION
 FROM zephyrprojectrtos/ci:${ZEPHYR_RTOS_TOOLCHAIN_VERSION}
-ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/zephyr"
+ARG REPOSITORY_URL="https://github.com/zephyrproject-rtos/example-application"
 
 ENV PATH="${PATH}:/home/user/.local/bin"
 
@@ -34,3 +34,4 @@ RUN install-python-dependencies
 
 # remove .west config, as we only need the directories such that they do not need to be downloaded again
 RUN rm -rf .west
+RUN rm -rf example-application

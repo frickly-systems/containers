@@ -6,8 +6,9 @@ on:
   pull_request:
     branches: ["main"]
   schedule:
-    # “At 04:20 on day-of-month 1.”
+    # "At 04:20 on day-of-month 1."
     - cron: "20 4 1 * *"
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
